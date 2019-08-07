@@ -1,6 +1,7 @@
 //
-//  IndicatorAnimationBallScale.swift
+//  IndicatorBallScale.swift
 //  LoadingButtons
+//
 //  Created by ninjaprox
 //  Updated by Michael Ho on 8/6/19.
 //

@@ -1,6 +1,9 @@
 //
-//  NVActivityIndicatorAnimationBarScale.swift
-//  NVActivityIndicatorView
+//  IndicatorLineScale.swift
+//  LoadingButtons
+//
+//  Created by ninjaprox
+//  Updated by Michael Ho on 8/6/19.
 //
 // The MIT License (MIT)
 
@@ -27,9 +30,29 @@
 
 import UIKit
 
-class NVActivityIndicatorAnimationLineScale: NVActivityIndicatorAnimationDelegate {
+class IndicatorLineScale: UIView, IndicatorProtocol {
+    
+    private(set) public var isAnimating: Bool = false
+    
+    open var radius: CGFloat = 18.0
+    open var color: UIColor = .lightGray
+    
+    func startAnimating() {
+        guard !isAnimating else { return }
+        isHidden = false
+        isAnimating = true
+        layer.speed = 1
+        setupAnimation(in: self.layer, size: CGSize(width: 2*radius, height: 2*radius))
+    }
+    
+    func stopAnimating() {
+        guard isAnimating else { return }
+        isHidden = true
+        isAnimating = false
+        layer.sublayers?.removeAll()
+    }
 
-    func setUpAnimation(in layer: CALayer, size: CGSize, color: UIColor) {
+    func setupAnimation(in layer: CALayer, size: CGSize) {
         let lineSize = size.width / 9
         let x = (layer.bounds.size.width - size.width) / 2
         let y = (layer.bounds.size.height - size.height) / 2

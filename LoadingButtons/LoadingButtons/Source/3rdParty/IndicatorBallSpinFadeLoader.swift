@@ -1,6 +1,9 @@
 //
-//  NVActivityIndicatorAnimationBallSpinFadeLoader.swift
-//  NVActivityIndicatorView
+//  IndicatorBallSpinFadeLoader.swift
+//  LoadingButtons
+//
+//  Created by ninjaprox
+//  Updated by Michael Ho on 8/6/19.
 //
 // The MIT License (MIT)
 
@@ -27,9 +30,29 @@
 
 import UIKit
 
-class NVActivityIndicatorAnimationBallSpinFadeLoader: NVActivityIndicatorAnimationDelegate {
+class IndicatorBallSpinFadeLoader: UIView, IndicatorProtocol {
 
-    func setUpAnimation(in layer: CALayer, size: CGSize, color: UIColor) {
+    private(set) public var isAnimating: Bool = false
+    
+    open var radius: CGFloat = 18.0
+    open var color: UIColor = .lightGray
+    
+    func startAnimating() {
+        guard !isAnimating else { return }
+        isHidden = false
+        isAnimating = true
+        layer.speed = 1
+        setupAnimation(in: self.layer, size: CGSize(width: 2*radius, height: 2*radius))
+    }
+    
+    func stopAnimating() {
+        guard isAnimating else { return }
+        isHidden = true
+        isAnimating = false
+        layer.sublayers?.removeAll()
+    }
+    
+    func setupAnimation(in layer: CALayer, size: CGSize) {
         let circleSpacing: CGFloat = -2
         let circleSize = (size.width - 4 * circleSpacing) / 5
         let x = (layer.bounds.size.width - size.width) / 2

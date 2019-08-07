@@ -8,11 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		303FBBA622F75D1D00091707 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303FBBA522F75D1D00091707 /* AppDelegate.swift */; };
-		303FBBA822F75D1D00091707 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303FBBA722F75D1D00091707 /* ViewController.swift */; };
-		303FBBAB22F75D1D00091707 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303FBBA922F75D1D00091707 /* Main.storyboard */; };
+		303FBBA822F75D1D00091707 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303FBBA722F75D1D00091707 /* MainViewController.swift */; };
 		303FBBAD22F75D1E00091707 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 303FBBAC22F75D1E00091707 /* Assets.xcassets */; };
 		303FBBB022F75D1E00091707 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303FBBAE22F75D1E00091707 /* LaunchScreen.storyboard */; };
 		303FBBBB22F75D1E00091707 /* LoadingButtonsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303FBBBA22F75D1E00091707 /* LoadingButtonsUITests.swift */; };
+		303FBBC722F75DE600091707 /* MaterialLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303FBBC622F75DE600091707 /* MaterialLoadingIndicator.swift */; };
+		303FBBC922F75E0000091707 /* MaterialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303FBBC822F75E0000091707 /* MaterialButton.swift */; };
+		3069DCEA22FB46E400D1E975 /* IndicatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3069DCE922FB46E400D1E975 /* IndicatorProtocol.swift */; };
+		3069DCEC22FB484400D1E975 /* IndicatorBallScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3069DCEB22FB484400D1E975 /* IndicatorBallScale.swift */; };
+		3069DCEE22FB68D700D1E975 /* IndicatorLineScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3069DCED22FB68D700D1E975 /* IndicatorLineScale.swift */; };
+		3069DCF022FB6A9E00D1E975 /* IndicatorLineScalePulseOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3069DCEF22FB6A9E00D1E975 /* IndicatorLineScalePulseOut.swift */; };
+		3069DCF222FB6AFC00D1E975 /* IndicatorBallSpinFadeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3069DCF122FB6AFC00D1E975 /* IndicatorBallSpinFadeLoader.swift */; };
+		3069DCF422FB739B00D1E975 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3069DCF322FB739B00D1E975 /* LoadingButton.swift */; };
+		30DCD4D022FA67FB00E75E3A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DCD4CF22FA67FB00E75E3A /* Extensions.swift */; };
+		30DCD4D222FA684D00E75E3A /* RippleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DCD4D122FA684D00E75E3A /* RippleLayer.swift */; };
+		30DCD4D522FA6BB500E75E3A /* BounceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DCD4D422FA6BB500E75E3A /* BounceButton.swift */; };
+		30DCD4D722FA6EED00E75E3A /* IndicatorBallPulse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DCD4D622FA6EED00E75E3A /* IndicatorBallPulse.swift */; };
+		30DCD4DB22FA6F1600E75E3A /* NVActivityIndicatorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DCD4DA22FA6F1600E75E3A /* NVActivityIndicatorShape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,14 +40,26 @@
 /* Begin PBXFileReference section */
 		303FBBA222F75D1D00091707 /* LoadingButtons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoadingButtons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		303FBBA522F75D1D00091707 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		303FBBA722F75D1D00091707 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		303FBBAA22F75D1D00091707 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		303FBBA722F75D1D00091707 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		303FBBAC22F75D1E00091707 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		303FBBAF22F75D1E00091707 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		303FBBB122F75D1E00091707 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		303FBBB622F75D1E00091707 /* LoadingButtonsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoadingButtonsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		303FBBBA22F75D1E00091707 /* LoadingButtonsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButtonsUITests.swift; sourceTree = "<group>"; };
 		303FBBBC22F75D1E00091707 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		303FBBC622F75DE600091707 /* MaterialLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialLoadingIndicator.swift; sourceTree = "<group>"; };
+		303FBBC822F75E0000091707 /* MaterialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialButton.swift; sourceTree = "<group>"; };
+		3069DCE922FB46E400D1E975 /* IndicatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorProtocol.swift; sourceTree = "<group>"; };
+		3069DCEB22FB484400D1E975 /* IndicatorBallScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorBallScale.swift; sourceTree = "<group>"; };
+		3069DCED22FB68D700D1E975 /* IndicatorLineScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorLineScale.swift; sourceTree = "<group>"; };
+		3069DCEF22FB6A9E00D1E975 /* IndicatorLineScalePulseOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorLineScalePulseOut.swift; sourceTree = "<group>"; };
+		3069DCF122FB6AFC00D1E975 /* IndicatorBallSpinFadeLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorBallSpinFadeLoader.swift; sourceTree = "<group>"; };
+		3069DCF322FB739B00D1E975 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
+		30DCD4CF22FA67FB00E75E3A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		30DCD4D122FA684D00E75E3A /* RippleLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RippleLayer.swift; sourceTree = "<group>"; };
+		30DCD4D422FA6BB500E75E3A /* BounceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BounceButton.swift; sourceTree = "<group>"; };
+		30DCD4D622FA6EED00E75E3A /* IndicatorBallPulse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorBallPulse.swift; sourceTree = "<group>"; };
+		30DCD4DA22FA6F1600E75E3A /* NVActivityIndicatorShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorShape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +101,9 @@
 		303FBBA422F75D1D00091707 /* LoadingButtons */ = {
 			isa = PBXGroup;
 			children = (
+				303FBBC522F75D6D00091707 /* Source */,
 				303FBBA522F75D1D00091707 /* AppDelegate.swift */,
-				303FBBA722F75D1D00091707 /* ViewController.swift */,
-				303FBBA922F75D1D00091707 /* Main.storyboard */,
+				303FBBA722F75D1D00091707 /* MainViewController.swift */,
 				303FBBAC22F75D1E00091707 /* Assets.xcassets */,
 				303FBBAE22F75D1E00091707 /* LaunchScreen.storyboard */,
 				303FBBB122F75D1E00091707 /* Info.plist */,
@@ -94,6 +118,34 @@
 				303FBBBC22F75D1E00091707 /* Info.plist */,
 			);
 			path = LoadingButtonsUITests;
+			sourceTree = "<group>";
+		};
+		303FBBC522F75D6D00091707 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				30DCD4D322FA6B2C00E75E3A /* 3rdParty */,
+				30DCD4CF22FA67FB00E75E3A /* Extensions.swift */,
+				30DCD4D122FA684D00E75E3A /* RippleLayer.swift */,
+				303FBBC622F75DE600091707 /* MaterialLoadingIndicator.swift */,
+				3069DCF322FB739B00D1E975 /* LoadingButton.swift */,
+				303FBBC822F75E0000091707 /* MaterialButton.swift */,
+				30DCD4D422FA6BB500E75E3A /* BounceButton.swift */,
+				3069DCE922FB46E400D1E975 /* IndicatorProtocol.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		30DCD4D322FA6B2C00E75E3A /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				3069DCF122FB6AFC00D1E975 /* IndicatorBallSpinFadeLoader.swift */,
+				3069DCEF22FB6A9E00D1E975 /* IndicatorLineScalePulseOut.swift */,
+				3069DCED22FB68D700D1E975 /* IndicatorLineScale.swift */,
+				30DCD4D622FA6EED00E75E3A /* IndicatorBallPulse.swift */,
+				3069DCEB22FB484400D1E975 /* IndicatorBallScale.swift */,
+				30DCD4DA22FA6F1600E75E3A /* NVActivityIndicatorShape.swift */,
+			);
+			path = 3rdParty;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,7 +231,6 @@
 			files = (
 				303FBBB022F75D1E00091707 /* LaunchScreen.storyboard in Resources */,
 				303FBBAD22F75D1E00091707 /* Assets.xcassets in Resources */,
-				303FBBAB22F75D1D00091707 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,8 +248,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				303FBBA822F75D1D00091707 /* ViewController.swift in Sources */,
+				3069DCF022FB6A9E00D1E975 /* IndicatorLineScalePulseOut.swift in Sources */,
+				30DCD4D722FA6EED00E75E3A /* IndicatorBallPulse.swift in Sources */,
+				30DCD4D022FA67FB00E75E3A /* Extensions.swift in Sources */,
+				3069DCEC22FB484400D1E975 /* IndicatorBallScale.swift in Sources */,
+				30DCD4DB22FA6F1600E75E3A /* NVActivityIndicatorShape.swift in Sources */,
+				3069DCEE22FB68D700D1E975 /* IndicatorLineScale.swift in Sources */,
+				3069DCEA22FB46E400D1E975 /* IndicatorProtocol.swift in Sources */,
+				30DCD4D222FA684D00E75E3A /* RippleLayer.swift in Sources */,
+				303FBBA822F75D1D00091707 /* MainViewController.swift in Sources */,
+				3069DCF222FB6AFC00D1E975 /* IndicatorBallSpinFadeLoader.swift in Sources */,
 				303FBBA622F75D1D00091707 /* AppDelegate.swift in Sources */,
+				303FBBC922F75E0000091707 /* MaterialButton.swift in Sources */,
+				3069DCF422FB739B00D1E975 /* LoadingButton.swift in Sources */,
+				30DCD4D522FA6BB500E75E3A /* BounceButton.swift in Sources */,
+				303FBBC722F75DE600091707 /* MaterialLoadingIndicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,14 +285,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		303FBBA922F75D1D00091707 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				303FBBAA22F75D1D00091707 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		303FBBAE22F75D1E00091707 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -362,6 +418,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = LoadingButtons/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -379,6 +436,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = LoadingButtons/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

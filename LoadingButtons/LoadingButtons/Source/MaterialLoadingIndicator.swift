@@ -9,10 +9,10 @@
 
 import UIKit
 
-open class MaterialLoadingIndicator: UIView {
-    
+open class MaterialLoadingIndicator: UIView, IndicatorProtocol {
+
     fileprivate let drawableLayer = CAShapeLayer()
-    fileprivate var animating = false
+    private(set) public var isAnimating: Bool = false
     
     @IBInspectable open var color: UIColor = .lightGray {
         didSet {
@@ -60,18 +60,19 @@ open class MaterialLoadingIndicator: UIView {
     }
     
     open func startAnimating() {
-        if self.animating {
+        if self.isAnimating {
             return
         }
         
-        self.animating = true
+        self.isAnimating = true
         self.isHidden = false
-        self.resetAnimations()
+        // Size is unused here.
+        setupAnimation(in: self.drawableLayer, size: .zero)
     }
     
     open func stopAnimating() {
         self.drawableLayer.removeAllAnimations()
-        self.animating = false
+        self.isAnimating = false
         self.isHidden = true
     }
     
@@ -101,12 +102,12 @@ open class MaterialLoadingIndicator: UIView {
             radius: radius,
             startAngle: 0,
             endAngle: CGFloat(2 * Double.pi),
-            clockwise: true)
-            .cgPath
+            clockwise: true
+        ).cgPath
     }
     
-    fileprivate func resetAnimations() {
-        drawableLayer.removeAllAnimations()
+    func setupAnimation(in layer: CALayer, size: CGSize) {
+        layer.removeAllAnimations()
         
         let rotationAnim = CABasicAnimation(keyPath: "transform.rotation")
         rotationAnim.fromValue = 0
@@ -149,7 +150,7 @@ open class MaterialLoadingIndicator: UIView {
         strokeAnimGroup.repeatCount = Float.infinity
         strokeAnimGroup.isRemovedOnCompletion = false
         
-        self.drawableLayer.add(rotationAnim, forKey: "rotation")
-        self.drawableLayer.add(strokeAnimGroup, forKey: "stroke")
+        layer.add(rotationAnim, forKey: "rotation")
+        layer.add(strokeAnimGroup, forKey: "stroke")
     }
 }

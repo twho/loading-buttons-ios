@@ -37,18 +37,3 @@ protocol IndicatorProtocol {
      */
     func setupAnimation(in layer: CALayer, size: CGSize)
 }
-
-protocol LoadingButtonProtocol {
-    /**
-     Activity indicator needs to be set up for loading button.
-     */
-    var indicator: UIView & IndicatorProtocol { get set }
-    /**
-     Get all views in the button. Views include the button itself and the shadow.
-     */
-    var entireViewGroup: [UIView]  { get }
-    
-    func showLoader(userInteraction: Bool, _ completion: LBCallback)
-    
-    func hideLoader(_ completion: LBCallback)
-}

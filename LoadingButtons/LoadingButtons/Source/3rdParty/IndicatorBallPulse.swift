@@ -1,6 +1,7 @@
 //
-//  IndicatorAnimationBallPulse.swift
+//  IndicatorBallPulse.swift
 //  LoadingButtons
+//
 //  Created by ninjaprox
 //  Updated by Michael Ho on 8/6/19.
 //
@@ -29,7 +30,7 @@
 
 import UIKit
 
-class IndicatorAnimationBallPulse: UIView, IndicatorProtocol {
+class IndicatorBallPulse: UIView, IndicatorProtocol {
 
     private(set) public var isAnimating: Bool = false
     
@@ -41,9 +42,7 @@ class IndicatorAnimationBallPulse: UIView, IndicatorProtocol {
         self.radius = radius
         self.color = color
     }
-    /**
-     Start animating.
-     */
+    
     func startAnimating() {
         guard !isAnimating else { return }
         isHidden = false
