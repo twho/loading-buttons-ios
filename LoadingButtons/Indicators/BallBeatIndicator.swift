@@ -1,5 +1,5 @@
 //
-//  IndicatorBallPulse.swift
+//  BallBeatIndicator.swift
 //  LoadingButtons
 //
 //  Created by ninjaprox
@@ -30,53 +30,44 @@
 
 import UIKit
 
-class IndicatorBallPulse: UIView, IndicatorProtocol {
+open class BallBeatIndicator: LBIndicator {
 
-    private(set) public var isAnimating: Bool = false
-    
-    open var radius: CGFloat = 18.0
-    open var color: UIColor = .lightGray
-    
-    public convenience init(radius: CGFloat = 18.0, color: UIColor = .gray) {
-        self.init()
-        self.radius = radius
-        self.color = color
-    }
-    
-    func startAnimating() {
-        guard !isAnimating else { return }
-        isHidden = false
-        isAnimating = true
-        layer.speed = 1
-        setupAnimation(in: self.layer, size: CGSize(width: 2*radius, height: 2*radius))
-    }
-    
-    func stopAnimating() {
-        guard isAnimating else { return }
-        isHidden = true
-        isAnimating = false
-        layer.sublayers?.removeAll()
-    }
-    
-    func setupAnimation(in layer: CALayer, size: CGSize) {
+    open override func setupAnimation(in layer: CALayer, size: CGSize) {
         let circleSpacing: CGFloat = 2
-        let circleSize: CGFloat = (size.width - 2 * circleSpacing) / 3
-        let x: CGFloat = (layer.bounds.size.width - size.width) / 2
-        let y: CGFloat = (layer.bounds.size.height - circleSize) / 2
-        let duration: CFTimeInterval = 0.75
+        let circleSize = (size.width - circleSpacing * 2) / 3
+        let x = (layer.bounds.size.width - size.width) / 2
+        let y = (layer.bounds.size.height - circleSize) / 2
+        let duration: CFTimeInterval = 0.7
         let beginTime = CACurrentMediaTime()
-        let beginTimes: [CFTimeInterval] = [0.12, 0.24, 0.36]
-        let timingFunction = CAMediaTimingFunction(controlPoints: 0.2, 0.68, 0.18, 1.08)
-        let animation = CAKeyframeAnimation(keyPath: "transform.scale")
-
-        // Animation
-        animation.keyTimes = [0, 0.3, 1]
-        animation.timingFunctions = [timingFunction, timingFunction]
-        animation.values = [1, 0.3, 1]
+        let beginTimes = [0.35, 0, 0.35]
+        
+        // Scale animation
+        let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
+        
+        scaleAnimation.keyTimes = [0, 0.5, 1]
+        scaleAnimation.values = [1, 0.75, 1]
+        scaleAnimation.duration = duration
+        
+        // Opacity animation
+        let opacityAnimation = CAKeyframeAnimation(keyPath: "opacity")
+        
+        opacityAnimation.keyTimes = [0, 0.5, 1]
+        opacityAnimation.values = [1, 0.2, 1]
+        opacityAnimation.duration = duration
+        
+        // Aniamtion
+        let animation = CAAnimationGroup()
+        
+        animation.animations = [scaleAnimation, opacityAnimation]
+        #if swift(>=4.2)
+        animation.timingFunction = CAMediaTimingFunction(name: .linear)
+        #else
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        #endif
         animation.duration = duration
         animation.repeatCount = HUGE
         animation.isRemovedOnCompletion = false
-
+        
         // Draw circles
         for i in 0 ..< 3 {
             let circle = NVActivityIndicatorShape.circle.layerWith(size: CGSize(width: circleSize, height: circleSize), color: color)
@@ -84,7 +75,7 @@ class IndicatorBallPulse: UIView, IndicatorProtocol {
                                y: y,
                                width: circleSize,
                                height: circleSize)
-
+            
             animation.beginTime = beginTime + beginTimes[i]
             circle.frame = frame
             circle.add(animation, forKey: "animation")

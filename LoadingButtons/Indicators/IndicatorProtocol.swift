@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol IndicatorProtocol {
+public protocol IndicatorProtocol {
     /**
      The radius of the indicator.
      */

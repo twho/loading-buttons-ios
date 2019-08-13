@@ -25,28 +25,28 @@ extension UIColor {
      
      Returns a 4-tuple that represents the CMYK value converted from input RGB.
      */
-    private func RGBtoCMYK(
+    public func RGBtoCMYK(
         red: CGFloat,
         green: CGFloat,
         blue: CGFloat
-        ) -> (
+    ) -> (
         cyan: CGFloat,
         magenta: CGFloat,
         yellow: CGFloat,
         key: CGFloat
-        ) {
-            // Base case
-            if red == 0, green == 0, blue == 0 {
-                return (0, 0, 0, 1)
-            }
-            var cyan = 1 - red
-            var magenta = 1 - green
-            var yellow = 1 - blue
-            let minCMY = min(cyan, magenta, yellow)
-            cyan = (cyan - minCMY) / (1 - minCMY)
-            magenta = (magenta - minCMY) / (1 - minCMY)
-            yellow = (yellow - minCMY) / (1 - minCMY)
-            return (cyan, magenta, yellow, minCMY)
+    ) {
+        // Base case
+        if red == 0, green == 0, blue == 0 {
+            return (0, 0, 0, 1)
+        }
+        var cyan = 1 - red
+        var magenta = 1 - green
+        var yellow = 1 - blue
+        let minCMY = min(cyan, magenta, yellow)
+        cyan = (cyan - minCMY) / (1 - minCMY)
+        magenta = (magenta - minCMY) / (1 - minCMY)
+        yellow = (yellow - minCMY) / (1 - minCMY)
+        return (cyan, magenta, yellow, minCMY)
     }
     /**
      Convert CMYK value to RGB value.
@@ -58,20 +58,20 @@ extension UIColor {
      
      Returns a 3-tuple that represents the RGB value converted from input CMYK.
      */
-    private func CMYKtoRGB(
+    public func CMYKtoRGB(
         cyan: CGFloat,
         magenta: CGFloat,
         yellow: CGFloat,
         key: CGFloat
-        ) -> (
+    ) -> (
         red: CGFloat,
         green: CGFloat,
         blue: CGFloat
-        ) {
-            let red = (1 - cyan) * (1 - key)
-            let green = (1 - magenta) * (1 - key)
-            let blue = (1 - yellow) * (1 - key)
-            return (red, green, blue)
+    ) {
+        let red = (1 - cyan) * (1 - key)
+        let green = (1 - magenta) * (1 - key)
+        let blue = (1 - yellow) * (1 - key)
+        return (red, green, blue)
     }
     /**
      Get the tint color of the current color.

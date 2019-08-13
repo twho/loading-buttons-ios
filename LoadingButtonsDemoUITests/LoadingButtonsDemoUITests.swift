@@ -1,14 +1,14 @@
 //
-//  LoadingButtonsUITests.swift
-//  LoadingButtonsUITests
+//  LoadingButtonsDemoUITests.swift
+//  LoadingButtonsDemoUITests
 //
-//  Created by Ho, Tsung Wei on 8/4/19.
-//  Copyright © 2019 Ho, Tsungwei. All rights reserved.
+//  Created by Ho, Tsung Wei on 8/8/19.
+//  Copyright © 2019 Michael Ho. All rights reserved.
 //
 
 import XCTest
 
-class LoadingButtonsUITests: XCTestCase {
+class LoadingButtonsDemoUITests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

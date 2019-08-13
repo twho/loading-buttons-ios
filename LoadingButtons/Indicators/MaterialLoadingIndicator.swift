@@ -9,12 +9,11 @@
 
 import UIKit
 
-open class MaterialLoadingIndicator: UIView, IndicatorProtocol {
+open class MaterialLoadingIndicator: LBIndicator {
 
     fileprivate let drawableLayer = CAShapeLayer()
-    private(set) public var isAnimating: Bool = false
     
-    @IBInspectable open var color: UIColor = .lightGray {
+    override open var color: UIColor {
         didSet {
             drawableLayer.strokeColor = self.color.cgColor
         }
@@ -33,8 +32,6 @@ open class MaterialLoadingIndicator: UIView, IndicatorProtocol {
             updatePath()
         }
     }
-    
-    open var radius: CGFloat = 18.0
     
     public convenience init(radius: CGFloat = 18.0, color: UIColor = .gray) {
         self.init()
@@ -59,18 +56,17 @@ open class MaterialLoadingIndicator: UIView, IndicatorProtocol {
         updatePath()
     }
     
-    open func startAnimating() {
+    override open func startAnimating() {
         if self.isAnimating {
             return
         }
-        
         self.isAnimating = true
         self.isHidden = false
         // Size is unused here.
         setupAnimation(in: self.drawableLayer, size: .zero)
     }
     
-    open func stopAnimating() {
+    override open func stopAnimating() {
         self.drawableLayer.removeAllAnimations()
         self.isAnimating = false
         self.isHidden = true
@@ -106,7 +102,7 @@ open class MaterialLoadingIndicator: UIView, IndicatorProtocol {
         ).cgPath
     }
     
-    func setupAnimation(in layer: CALayer, size: CGSize) {
+    override open func setupAnimation(in layer: CALayer, size: CGSize) {
         layer.removeAllAnimations()
         
         let rotationAnim = CABasicAnimation(keyPath: "transform.rotation")

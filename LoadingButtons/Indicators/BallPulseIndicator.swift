@@ -1,5 +1,5 @@
 //
-//  IndicatorLineScale.swift
+//  BallPulseIndicator.swift
 //  LoadingButtons
 //
 //  Created by ninjaprox
@@ -30,56 +30,39 @@
 
 import UIKit
 
-class IndicatorLineScale: UIView, IndicatorProtocol {
-    
-    private(set) public var isAnimating: Bool = false
-    
-    open var radius: CGFloat = 18.0
-    open var color: UIColor = .lightGray
-    
-    func startAnimating() {
-        guard !isAnimating else { return }
-        isHidden = false
-        isAnimating = true
-        layer.speed = 1
-        setupAnimation(in: self.layer, size: CGSize(width: 2*radius, height: 2*radius))
-    }
-    
-    func stopAnimating() {
-        guard isAnimating else { return }
-        isHidden = true
-        isAnimating = false
-        layer.sublayers?.removeAll()
-    }
+open class BallPulseIndicator: LBIndicator {
 
-    func setupAnimation(in layer: CALayer, size: CGSize) {
-        let lineSize = size.width / 9
-        let x = (layer.bounds.size.width - size.width) / 2
-        let y = (layer.bounds.size.height - size.height) / 2
-        let duration: CFTimeInterval = 1
+    open override func setupAnimation(in layer: CALayer, size: CGSize) {
+        let circleSpacing: CGFloat = 2
+        let circleSize: CGFloat = (size.width - 2 * circleSpacing) / 3
+        let x: CGFloat = (layer.bounds.size.width - size.width) / 2
+        let y: CGFloat = (layer.bounds.size.height - circleSize) / 2
+        let duration: CFTimeInterval = 0.75
         let beginTime = CACurrentMediaTime()
-        let beginTimes = [0.1, 0.2, 0.3, 0.4, 0.5]
+        let beginTimes: [CFTimeInterval] = [0.12, 0.24, 0.36]
         let timingFunction = CAMediaTimingFunction(controlPoints: 0.2, 0.68, 0.18, 1.08)
+        let animation = CAKeyframeAnimation(keyPath: "transform.scale")
 
         // Animation
-        let animation = CAKeyframeAnimation(keyPath: "transform.scale.y")
-
-        animation.keyTimes = [0, 0.5, 1]
+        animation.keyTimes = [0, 0.3, 1]
         animation.timingFunctions = [timingFunction, timingFunction]
-        animation.values = [1, 0.4, 1]
+        animation.values = [1, 0.3, 1]
         animation.duration = duration
         animation.repeatCount = HUGE
         animation.isRemovedOnCompletion = false
 
-        // Draw lines
-        for i in 0 ..< 5 {
-            let line = NVActivityIndicatorShape.line.layerWith(size: CGSize(width: lineSize, height: size.height), color: color)
-            let frame = CGRect(x: x + lineSize * 2 * CGFloat(i), y: y, width: lineSize, height: size.height)
+        // Draw circles
+        for i in 0 ..< 3 {
+            let circle = NVActivityIndicatorShape.circle.layerWith(size: CGSize(width: circleSize, height: circleSize), color: color)
+            let frame = CGRect(x: x + circleSize * CGFloat(i) + circleSpacing * CGFloat(i),
+                               y: y,
+                               width: circleSize,
+                               height: circleSize)
 
             animation.beginTime = beginTime + beginTimes[i]
-            line.frame = frame
-            line.add(animation, forKey: "animation")
-            layer.addSublayer(line)
+            circle.frame = frame
+            circle.add(animation, forKey: "animation")
+            layer.addSublayer(circle)
         }
     }
 }
