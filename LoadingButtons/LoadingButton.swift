@@ -27,11 +27,17 @@ open class LoadingButton: UIButton {
      Set to true to add shadow to the button.
      */
     open var withShadow: Bool = false
+    /**
+     The corner radius of the button
+     */
     open var cornerRadius: CGFloat = 12.0 {
         didSet {
             self.layer.cornerRadius = self.cornerRadius
         }
     }
+    /**
+     Shadow view.
+     */
     open var shadowLayer: UIView?
     /**
      Get all views in the button. Views include the button itself and the shadow.
@@ -69,17 +75,17 @@ open class LoadingButton: UIButton {
         withShadow: Bool = false
     ) {
         super.init(frame: frame)
-        
+        // Set the icon of the button
         if let icon = icon {
             self.setImage(icon)
         }
-        
+        // Set the title of the button
         if let text = text {
             self.setTitle(text)
             self.setTitleColor(textColor, for: .normal)
             self.titleLabel?.adjustsFontSizeToFitWidth = true
         }
-        
+        // Set button contents
         self.titleLabel?.font = font
         self.bgColor = bgColor
         self.backgroundColor = bgColor
@@ -89,7 +95,7 @@ open class LoadingButton: UIButton {
         self.withShadow = withShadow
         self.cornerRadius = cornerRadius
     }
-    
+    // draw
     open override func draw(_ rect: CGRect) {
         super.draw(rect)
         if shadowAdded || !withShadow { return }
@@ -100,17 +106,22 @@ open class LoadingButton: UIButton {
         shadowLayer.setAsShadow(bounds: bounds, cornerRadius: self.cornerRadius)
         self.superview?.insertSubview(shadowLayer, belowSubview: self)
     }
-    
+    // Required init
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+    /**
+     Display the loader inside the button.
+     
+     - Parameter userInteraction: Enable the user interaction while displaying the loader.
+     - Parameter completion:      The completion handler.
+     */
     open func showLoader(userInteraction: Bool, _ completion: LBCallback = nil) {
         showLoader([titleLabel, imageView], userInteraction: userInteraction, completion)
     }
     
     private func showLoader(_ viewsToBeHide: [UIView?], userInteraction: Bool = false, _ completion: LBCallback = nil) {
-        guard self.subviews.contains(indicator) == false else { return }
+        guard !self.subviews.contains(indicator) else { return }
         // Set up loading indicator
         indicator.radius = min(0.7*self.frame.height/2, indicator.radius)
         isLoading = true
@@ -132,11 +143,17 @@ open class LoadingButton: UIButton {
     }
     /**
      Show a loader inside the button with image.
+     
+     - Parameter userInteraction: Enable user interaction while showing the loader.
      */
     open func showLoaderWithImage(userInteraction: Bool = false) {
         showLoader([self.titleLabel], userInteraction: userInteraction)
     }
-    
+    /**
+     Hide the loader displayed.
+     
+     - Parameter completion: The completion handler.
+     */
     open func hideLoader(_ completion: LBCallback = nil) {
         guard self.subviews.contains(indicator) else { return }
         isLoading = false
@@ -150,32 +167,35 @@ open class LoadingButton: UIButton {
             completion?()
         }
     }
-    
+    /**
+     Make the content of the button fill the button.
+     */
     public func fillContent() {
         self.contentVerticalAlignment = .fill
         self.contentHorizontalAlignment = .fill
     }
-    
+    // layoutSubviews
     open override func layoutSubviews() {
         super.layoutSubviews()
         indicator.center = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/2)
     }
     // MARK: Touch
+    // touchesBegan
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.backgroundColor = self.bgColor.getColorTint()
     }
-    
+    // touchesEnded
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         self.backgroundColor = self.bgColor
     }
-    
+    // touchesCancelled
     open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
         self.backgroundColor = self.bgColor
     }
-    
+    // touchesMoved
     open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         self.backgroundColor = self.bgColor.getColorTint()

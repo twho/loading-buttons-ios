@@ -24,6 +24,10 @@ class ViewController: UIViewController {
         .lineScalePulse, .ballBeat
     ]
     private var selectedCell: UICollectionViewCell?
+    // MARK: - Package-protected properties
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +56,7 @@ class ViewController: UIViewController {
             sender.hideLoader()
         } else {
             sender.showLoader(userInteraction: true)
-            delay(5.0) {
+            delay(3.0) {
                 sender.hideLoader()
             }
         }
