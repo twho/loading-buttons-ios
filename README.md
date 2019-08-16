@@ -19,7 +19,8 @@ You may see the following [Medium](https://medium.com/) article for detailed exp
 ## Usage
 ### Declaration
 ```swift
-// You may set the frame to zero if you use AutoLayout to handle the frame. Otherwise, specify the frame in initializer.
+// You may set the frame to zero if you use AutoLayout to handle the frame. 
+// Otherwise, specify the frame in initializer.
 btnLoading = LoadingButton(frame: .zero, text: "Button", textColor: .black, bgColor: .white)
 ```
 ### System Default 
