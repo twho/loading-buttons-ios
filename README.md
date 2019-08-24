@@ -16,6 +16,15 @@ You may see the following [Medium](https://medium.com/) article for detailed exp
 - Swift 5.0
 - iOS 11.0+
 
+## Installation
+LoadingButtons project is available via [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
+
+```
+$ pod 'MHLoadingButton'
+```
+
+If you don't use CocoaPods, you can download the entire project then import all the source files and use them in your project.
+
 ## Usage
 ### Declaration
 ```swift
