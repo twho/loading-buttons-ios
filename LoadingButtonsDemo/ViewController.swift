@@ -52,21 +52,14 @@ class ViewController: UIViewController {
     
     @objc private func tapButton(_ sender: LoadingButton) {
         guard nil != selectedCell else { return }
-        if sender.isLoading {
-            sender.hideLoader()
-        } else {
-            sender.showLoader(userInteraction: true)
-            delay(3.0) {
-                sender.hideLoader()
-            }
-        }
+        sender.isLoading ? sender.hideLoader() : sender.showLoader(userInteraction: true)
     }
     
     private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.allowsMultipleSelection = true
+        collectionView.allowsMultipleSelection = false
         collectionView.backgroundColor = .white
         collectionView.canCancelContentTouches = false
         if let layout = self.collectionView!.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -76,6 +69,12 @@ class ViewController: UIViewController {
         }
         self.view.addSubViews([collectionView])
         (collectionView.dataSource, collectionView.delegate) = (self, self)
+    }
+    // viewDidAppear
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Select an initial loading indicator
+        collectionView(self.collectionView, didSelectItemAt: IndexPath(item: 1, section: 1))
     }
     // viewDidLayoutSubviews
     override func viewDidLayoutSubviews() {
@@ -120,8 +119,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width/3, height: collectionView.frame.size.height/3)
     }
-    // didHighlightItemAt
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+    // didSelectItemAt
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedCell = selectedCell {
             selectedCell.setCornerBorder()
         }

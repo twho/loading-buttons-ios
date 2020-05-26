@@ -51,6 +51,7 @@ open class LoadingButton: UIButton {
     }
     // Private properties
     private(set) var bgColor: UIColor = .lightGray
+    private var loaderWorkItem: DispatchWorkItem?
     // Init
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -119,28 +120,6 @@ open class LoadingButton: UIButton {
     open func showLoader(userInteraction: Bool, _ completion: LBCallback = nil) {
         showLoader([titleLabel, imageView], userInteraction: userInteraction, completion)
     }
-    
-    private func showLoader(_ viewsToBeHide: [UIView?], userInteraction: Bool = false, _ completion: LBCallback = nil) {
-        guard !self.subviews.contains(indicator) else { return }
-        // Set up loading indicator
-        indicator.radius = min(0.7*self.frame.height/2, indicator.radius)
-        isLoading = true
-        self.isUserInteractionEnabled = userInteraction
-        UIView.transition(with: self, duration: 0.2, options: .curveEaseOut, animations: {
-            viewsToBeHide.forEach {
-                $0?.alpha = 0.0
-            }
-        }) { [weak self] _ in
-            guard let self = self else { return }
-            self.addSubview(self.indicator)
-            if self.isLoading {
-                self.indicator.startAnimating()
-            } else {
-                self.hideLoader(completion)
-            }
-            completion?()
-        }
-    }
     /**
      Show a loader inside the button with image.
      
@@ -150,22 +129,68 @@ open class LoadingButton: UIButton {
         showLoader([self.titleLabel], userInteraction: userInteraction)
     }
     /**
+     Display the loader inside the button.
+     
+     - Parameter viewsToBeHidden: The views such as titleLabel, imageViewto be hidden while showing loading indicator.
+     - Parameter userInteraction: Enable the user interaction while displaying the loader.
+     - Parameter completion:      The completion handler.
+    */
+    open func showLoader(_ viewsToBeHidden: [UIView?], userInteraction: Bool = false, _ completion: LBCallback = nil) {
+        guard !self.subviews.contains(indicator) else { return }
+        // Set up loading indicator and update loading state
+        isLoading = true
+        self.isUserInteractionEnabled = userInteraction
+        indicator.radius = min(0.7*self.frame.height/2, indicator.radius)
+        indicator.alpha = 0.0
+        self.addSubview(self.indicator)
+        // Clean up
+        loaderWorkItem?.cancel()
+        loaderWorkItem = nil
+        // Create a new work item
+        loaderWorkItem = DispatchWorkItem { [weak self] in
+            guard let self = self, let item = self.loaderWorkItem, !item.isCancelled else { return }
+            UIView.transition(with: self, duration: 0.2, options: .curveEaseOut, animations: {
+                self.titleLabel?.alpha = 0.0
+                self.imageView?.alpha = 0.0
+                viewsToBeHidden.forEach {
+                    $0?.alpha = 0.0
+                }
+                self.indicator.alpha = 1.0
+            }) { _ in
+                guard !item.isCancelled else { return }
+                self.isLoading ? self.indicator.startAnimating() : self.hideLoader()
+                completion?()
+            }
+        }
+        loaderWorkItem?.perform()
+    }
+    /**
      Hide the loader displayed.
      
      - Parameter completion: The completion handler.
      */
     open func hideLoader(_ completion: LBCallback = nil) {
         guard self.subviews.contains(indicator) else { return }
+        // Update loading state
         isLoading = false
         self.isUserInteractionEnabled = true
         indicator.stopAnimating()
+        // Clean up
         indicator.removeFromSuperview()
-        UIView.transition(with: self, duration: 0.2, options: .curveEaseIn, animations: {
-            self.titleLabel?.alpha = 1.0
-            self.imageView?.alpha = 1.0
-        }) { _ in
-            completion?()
+        loaderWorkItem?.cancel()
+        loaderWorkItem = nil
+        // Create a new work item
+        loaderWorkItem = DispatchWorkItem { [weak self] in
+            guard let self = self, let item = self.loaderWorkItem, !item.isCancelled else { return }
+            UIView.transition(with: self, duration: 0.2, options: .curveEaseIn, animations: {
+                self.titleLabel?.alpha = 1.0
+                self.imageView?.alpha = 1.0
+            }) { _ in
+                guard !item.isCancelled else { return }
+                completion?()
+            }
         }
+        loaderWorkItem?.perform()
     }
     /**
      Make the content of the button fill the button.
@@ -208,7 +233,7 @@ extension UIActivityIndicatorView: IndicatorProtocol {
             return self.frame.width/2
         }
         set {
-            self.frame.size = CGSize(width: 2*radius, height: 2*radius)
+            self.frame.size = CGSize(width: 2*newValue, height: 2*newValue)
             self.setNeedsDisplay()
         }
     }
