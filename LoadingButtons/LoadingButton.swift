@@ -150,8 +150,6 @@ open class LoadingButton: UIButton {
         loaderWorkItem = DispatchWorkItem { [weak self] in
             guard let self = self, let item = self.loaderWorkItem, !item.isCancelled else { return }
             UIView.transition(with: self, duration: 0.2, options: .curveEaseOut, animations: {
-                self.titleLabel?.alpha = 0.0
-                self.imageView?.alpha = 0.0
                 viewsToBeHidden.forEach {
                     $0?.alpha = 0.0
                 }
