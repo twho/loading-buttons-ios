@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     private var indicators: [IndicatorType] = [
         .sysDefault, .material, .ballPulse,
         .ballPulseSync, .ballSpinFade, .lineScale,
-        .lineScalePulse, .ballBeat
+        .lineScalePulse, .ballBeat, .lineSpin
     ]
     private var selectedCell: UICollectionViewCell?
     // MARK: - Package-protected properties
@@ -32,17 +32,22 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
-        btnLine.addTarget(self, action: #selector(tapButton(_:)), for: .touchUpInside)
-        btnFill.addTarget(self, action: #selector(tapButton(_:)), for: .touchUpInside)
     }
     
     private func initUI() {
-        self.view.backgroundColor = .white
         navbar = addNavigationBar(title: "Loading Buttons")
-        // Leave the frame to be zero since we will use stackView later to handle the layouts
-        btnLine = LoadingButton(frame: .zero, text: "Line", textColor: .black, bgColor: .white)
-        btnLine.setCornerBorder(color: .black, cornerRadius: 12.0, borderWidth: 1.5)
-        btnFill = LoadingButton(frame: .zero, text: "Fill", textColor: .white, bgColor: .black)
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = .secondarySystemBackground
+            btnLine = LoadingButton(text: "Line", buttonStyle: .outline)
+            btnFill = LoadingButton(text: "Fill", buttonStyle: .fill)
+        } else {
+            self.view.backgroundColor = .white
+            btnLine = LoadingButton(text: "Line", textColor: .black, bgColor: .white)
+            btnLine.setCornerBorder(color: .black, cornerRadius: 12.0, borderWidth: 1.5)
+            btnFill = LoadingButton(text: "Fill", textColor: .white, bgColor: .black)
+        }
+        btnLine.addTarget(self, action: #selector(tapButton(_:)), for: .touchUpInside)
+        btnFill.addTarget(self, action: #selector(tapButton(_:)), for: .touchUpInside)
         stackBtns = UIStackView(arrangedSubviews: [btnLine, btnFill])
         stackBtns.distribution = .fillEqually
         stackBtns.axis = .horizontal
@@ -69,6 +74,15 @@ class ViewController: UIViewController {
         }
         self.view.addSubViews([collectionView])
         (collectionView.dataSource, collectionView.delegate) = (self, self)
+        self.collectionView.backgroundColor = .clear
+    }
+    /**
+     traitCollectionDidChange is called when user switch between dark and light mode. Whenever this is \
+     called, reset the UI.
+     */
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        self.view.subviews.forEach { $0.removeFromSuperview() }
+        initUI()
     }
     // viewDidAppear
     override func viewDidAppear(_ animated: Bool) {
@@ -127,7 +141,11 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         if let cell = collectionView.cellForItem(at: indexPath), let type = (cell as? CollectionViewCell)?.type {
             selectedCell = cell
             DispatchQueue.main.async {
-                cell.setCornerBorder(color: .black, borderWidth: 1.5)
+                if #available(iOS 13.0, *) {
+                    cell.setCornerBorder(color: .label, borderWidth: 1.5)
+                } else {
+                    cell.setCornerBorder(color: .black, borderWidth: 1.5)
+                }
             }
             // Reset buttons
             if btnLine.isLoading {
@@ -137,13 +155,21 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
                 btnFill.hideLoader()
             }
             // Set up line indicator
-            var lineIndicator = type.indicator
-            lineIndicator.color = .darkGray
+            let lineIndicator = type.indicator
             btnLine.indicator = lineIndicator
+            
             // Set up fill indicator
-            var fillIndicator = type.indicator
-            fillIndicator.color = .lightGray
+            let fillIndicator = type.indicator
             btnFill.indicator = fillIndicator
+            
+            // Set colors for dark/light mode
+            if #available(iOS 13.0, *) {
+                btnLine.indicator.color = .label
+                btnFill.indicator.color = .label
+            } else {
+                btnLine.indicator.color = .darkGray
+                btnFill.indicator.color = .lightGray
+            }
         }
     }
 }

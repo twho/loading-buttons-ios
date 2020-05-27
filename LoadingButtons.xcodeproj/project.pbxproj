@@ -43,6 +43,8 @@
 		30E13A9522FE177600EDA5CC /* BallBeatIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3061E47222FC691500AFE29A /* BallBeatIndicator.swift */; };
 		30E13A9622FE177600EDA5CC /* LineScalePulseIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3061E47322FC691500AFE29A /* LineScalePulseIndicator.swift */; };
 		30E13A9722FE177600EDA5CC /* BallPulseIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3061E47422FC691500AFE29A /* BallPulseIndicator.swift */; };
+		6827696B247E27B500A1E225 /* LineSpinFadeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6827696A247E27B500A1E225 /* LineSpinFadeLoader.swift */; };
+		6827696C247E295D00A1E225 /* LineSpinFadeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6827696A247E27B500A1E225 /* LineSpinFadeLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,7 @@
 		30C93B632301FE3100D66F10 /* UsefulExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsefulExtensions.swift; sourceTree = "<group>"; };
 		30E13A7922FE115F00EDA5CC /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		30E13A7B22FE152800EDA5CC /* IndicatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorType.swift; sourceTree = "<group>"; };
+		6827696A247E27B500A1E225 /* LineSpinFadeLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSpinFadeLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,14 +173,15 @@
 			children = (
 				3061E48022FC691F00AFE29A /* MaterialLoadingIndicator.swift */,
 				3061E47F22FC691F00AFE29A /* IndicatorProtocol.swift */,
-				3061E46E22FC691500AFE29A /* LineScaleIndicator.swift */,
 				3061E46F22FC691500AFE29A /* NVActivityIndicatorShape.swift */,
 				3061E47022FC691500AFE29A /* LBIndicator.swift */,
-				3061E47122FC691500AFE29A /* BallSpinFadeIndicator.swift */,
-				3061E47222FC691500AFE29A /* BallBeatIndicator.swift */,
+				3061E46E22FC691500AFE29A /* LineScaleIndicator.swift */,
 				3061E47322FC691500AFE29A /* LineScalePulseIndicator.swift */,
+				6827696A247E27B500A1E225 /* LineSpinFadeLoader.swift */,
+				3061E47222FC691500AFE29A /* BallBeatIndicator.swift */,
 				3061E47422FC691500AFE29A /* BallPulseIndicator.swift */,
 				30C93B602301E8EF00D66F10 /* BallPulseSyncIndicator.swift */,
+				3061E47122FC691500AFE29A /* BallSpinFadeIndicator.swift */,
 			);
 			path = Indicators;
 			sourceTree = "<group>";
@@ -358,6 +362,7 @@
 				3061E48622FC691F00AFE29A /* IndicatorProtocol.swift in Sources */,
 				3061E47522FC691500AFE29A /* LineScaleIndicator.swift in Sources */,
 				3061E47722FC691500AFE29A /* LBIndicator.swift in Sources */,
+				6827696B247E27B500A1E225 /* LineSpinFadeLoader.swift in Sources */,
 				3061E47A22FC691500AFE29A /* LineScalePulseIndicator.swift in Sources */,
 				3061E47822FC691500AFE29A /* BallSpinFadeIndicator.swift in Sources */,
 				3061E48722FC691F00AFE29A /* MaterialLoadingIndicator.swift in Sources */,
@@ -377,6 +382,7 @@
 				30C93B642301FE3100D66F10 /* UsefulExtensions.swift in Sources */,
 				30E13A9422FE177600EDA5CC /* BallSpinFadeIndicator.swift in Sources */,
 				3061E4CE22FC6AC100AFE29A /* ViewController.swift in Sources */,
+				6827696C247E295D00A1E225 /* LineSpinFadeLoader.swift in Sources */,
 				30E13A7C22FE152800EDA5CC /* IndicatorType.swift in Sources */,
 				30E13A9022FE177600EDA5CC /* IndicatorProtocol.swift in Sources */,
 				30E13A9222FE177600EDA5CC /* NVActivityIndicatorShape.swift in Sources */,

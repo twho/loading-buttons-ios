@@ -49,6 +49,14 @@ open class LoadingButton: UIButton {
         }
         return views
     }
+    /**
+     Button style for light mode and dark mode use. Only available on iOS 13 or later.
+     */
+    @available(iOS 13.0, *)
+    public enum ButtonStyle {
+        case fill
+        case outline
+    }
     // Private properties
     private(set) var bgColor: UIColor = .lightGray
     private var loaderWorkItem: DispatchWorkItem?
@@ -95,6 +103,32 @@ open class LoadingButton: UIButton {
         self.setCornerBorder(cornerRadius: cornerRadius)
         self.withShadow = withShadow
         self.cornerRadius = cornerRadius
+    }
+    /**
+     Convenience init of material design button using system default colors. This initializer
+     reflects dark mode colors on iOS 13 or later platforms. However, it will ignore any custom
+     colors set to the button.
+     
+     - Parameter icon:         the icon of the button, it is be nil by default.
+     - Parameter text:         the title of the button.
+     - Parameter font:         the font of the button label.
+     - Parameter cornerRadius: the corner radius of the button. It is set to 12.0 by default.
+     - Parameter withShadow:   set true to show the shadow of the button.
+     - Parameter buttonStyle:  specify the button style. Styles currently available are fill and outline.
+    */
+    @available(iOS 13.0, *)
+    public convenience init(icon: UIImage? = nil, text: String? = nil, font: UIFont? = nil,
+                            cornerRadius: CGFloat = 12.0, withShadow: Bool = false, buttonStyle: ButtonStyle) {
+        switch buttonStyle {
+        case .fill:
+            self.init(icon: icon, text: text, textColor: .label, font: font,
+                      bgColor: .systemFill, cornerRadius: cornerRadius, withShadow: withShadow)
+        case .outline:
+            self.init(icon: icon, text: text, textColor: .label, font: font,
+                      bgColor: .clear, cornerRadius: cornerRadius, withShadow: withShadow)
+            self.setCornerBorder(color: .label, cornerRadius: cornerRadius)
+        }
+        self.indicator.color = .label
     }
     // draw
     open override func draw(_ rect: CGRect) {
@@ -206,7 +240,7 @@ open class LoadingButton: UIButton {
     // touchesBegan
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        self.backgroundColor = self.bgColor.getColorTint()
+        self.backgroundColor = self.bgColor == UIColor.clear ? .lightGray : self.bgColor.getColorTint()
     }
     // touchesEnded
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -221,7 +255,7 @@ open class LoadingButton: UIButton {
     // touchesMoved
     open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        self.backgroundColor = self.bgColor.getColorTint()
+        self.backgroundColor = self.bgColor == UIColor.clear ? .lightGray : self.bgColor.getColorTint()
     }
 }
 // MARK: - UIActivityIndicatorView

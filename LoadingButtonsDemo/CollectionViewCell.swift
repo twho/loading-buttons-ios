@@ -12,7 +12,7 @@ class CollectionViewCell: UICollectionViewCell {
     // MARK: - UI widgets
     private var indicator: UIView & IndicatorProtocol = UIActivityIndicatorView()
     private var title: UILabel!
-    private var bgColor: UIColor = .white
+    private var bgColor: UIColor = .clear
     // Package-protected properties
     var type: IndicatorType = .sysDefault
 
@@ -62,7 +62,7 @@ class CollectionViewCell: UICollectionViewCell {
     // MARK: Touch
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        self.backgroundColor = self.bgColor.getColorTint()
+        self.backgroundColor = self.bgColor == UIColor.clear ? .lightGray : self.bgColor.getColorTint()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -77,6 +77,6 @@ class CollectionViewCell: UICollectionViewCell {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        self.backgroundColor = self.bgColor.getColorTint()
+        self.backgroundColor = self.bgColor == UIColor.clear ? .lightGray : self.bgColor.getColorTint()
     }
 }
