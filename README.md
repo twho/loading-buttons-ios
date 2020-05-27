@@ -8,7 +8,7 @@ You may see the following [Medium](https://medium.com/) article for detailed exp
 - [Create Loading Buttons in iOS using Swift](https://medium.com/@twho/create-loading-buttons-in-ios-using-swift-63ec77eebda?sk=8f69e9a7760cabacde096c34cc416f95)
 
 ## Key Features
-- The example gives you **8** choices of loading indicators with the loading button. 
+- The example gives you **9** choices of loading indicators with the loading button. 
 - The **IndicatorProtocol** clearly defines the functions and properties. You can refer to it and customize your own.
 - The **LoadingButton** class is made to be **open**, from which you can easily inherit and create your own.
 
@@ -28,9 +28,18 @@ If you don't use CocoaPods, you can download the entire project then import all 
 ## Usage
 ### Declaration
 ```swift
-// You may set the frame to zero if you use AutoLayout to handle the frame. 
-// Otherwise, specify the frame in initializer.
-btnLoading = LoadingButton(frame: .zero, text: "Button", textColor: .black, bgColor: .white)
+// The frame is default to zero. You need to use AutoLayout to resize it. 
+// Otherwise, you can specify the frame in initializer.
+if #available(iOS 13.0, *) {
+    // This is the new initializer for iOS 13 dark/light mode. 
+    // The syste colors will be used.
+    btnLoading = LoadingButton(text: "Button", buttonStyle: .outline) // Outlined button
+    btnLoading = LoadingButton(text: "Button", buttonStyle: .fill)    // Filled button
+} else {
+    // Custom color initializer
+    btnLoading = LoadingButton(text: "Button", textColor: .black, bgColor: .white)
+}
+
 ```
 ### System Default 
 ```swift
