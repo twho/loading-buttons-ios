@@ -72,3 +72,34 @@ extension UIView {
         }
     }
 }
+
+extension UIImage {
+    /**
+     Change the color of the image.
+     
+     - Parameter color: The color to be set to the UIImage.
+     
+     Returns an UIImage with specified color
+     */
+    public func colored(_ color: UIColor?) -> UIImage? {
+        if let newColor = color {
+            UIGraphicsBeginImageContextWithOptions(size, false, scale)
+            // Get current graphics context.
+            let context = UIGraphicsGetCurrentContext()!
+            context.translateBy(x: 0, y: size.height)
+            context.scaleBy(x: 1.0, y: -1.0)
+            context.setBlendMode(.normal)
+            // Fill the CGRect with the color specified.
+            let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            context.clip(to: rect, mask: cgImage!)
+            newColor.setFill()
+            context.fill(rect)
+            // Get the new image.
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            newImage.accessibilityIdentifier = accessibilityIdentifier
+            return newImage
+        }
+        return self
+    }
+}

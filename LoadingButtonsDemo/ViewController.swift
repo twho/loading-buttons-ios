@@ -23,7 +23,6 @@ class ViewController: UIViewController {
         .ballPulseSync, .ballSpinFade, .lineScale,
         .lineScalePulse, .ballBeat, .lineSpin
     ]
-    private var selectedCell: UICollectionViewCell?
     // MARK: - Package-protected properties
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -56,7 +55,6 @@ class ViewController: UIViewController {
     }
     
     @objc private func tapButton(_ sender: LoadingButton) {
-        guard nil != selectedCell else { return }
         sender.isLoading ? sender.hideLoader() : sender.showLoader(userInteraction: true)
     }
     
@@ -83,12 +81,16 @@ class ViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         self.view.subviews.forEach { $0.removeFromSuperview() }
         initUI()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .top)
+        }
     }
     // viewDidAppear
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Select an initial loading indicator
-        collectionView(self.collectionView, didSelectItemAt: IndexPath(item: 1, section: 1))
+        collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .top)
     }
     // viewDidLayoutSubviews
     override func viewDidLayoutSubviews() {
@@ -135,18 +137,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     }
     // didSelectItemAt
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let selectedCell = selectedCell {
-            selectedCell.setCornerBorder()
-        }
         if let cell = collectionView.cellForItem(at: indexPath), let type = (cell as? CollectionViewCell)?.type {
-            selectedCell = cell
-            DispatchQueue.main.async {
-                if #available(iOS 13.0, *) {
-                    cell.setCornerBorder(color: .label, borderWidth: 1.5)
-                } else {
-                    cell.setCornerBorder(color: .black, borderWidth: 1.5)
-                }
-            }
+            cell.isSelected = true
             // Reset buttons
             if btnLine.isLoading {
                 btnLine.hideLoader()
@@ -170,6 +162,12 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
                 btnLine.indicator.color = .darkGray
                 btnFill.indicator.color = .lightGray
             }
+        }
+    }
+    // didDeselectItemAt
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.isSelected = false
         }
     }
 }
