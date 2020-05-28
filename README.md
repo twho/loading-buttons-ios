@@ -7,7 +7,7 @@ You may see the following [Medium](https://medium.com/) article for detailed exp
 
 - [Create Loading Buttons in iOS using Swift](https://medium.com/@twho/create-loading-buttons-in-ios-using-swift-63ec77eebda?sk=8f69e9a7760cabacde096c34cc416f95)
 
-| <img src="gif/overview.gif" alt="Overview" width="240"/> | <img src="gif/overview-dark.gif" alt="Overview Dark" width="240"/>  | 
+| <img src="gif/overview-light.gif" alt="Overview" width="240"/> | <img src="gif/overview-dark.gif" alt="Overview Dark" width="240"/>  | 
 |:--:| :--:|
 | Light mode |  Dark mode |
 
@@ -50,7 +50,7 @@ if #available(iOS 13.0, *) {
 ```swift
 btnLoading.indicator = UIActivityIndicatorView()
 ```
-| <img src="gif/sysdefault.gif" alt="System Default" width="350"/> | <img src="gif/sysdefault-dark.gif" alt="System Default Dark" width="350"/> | 
+| <img src="gif/sysdefault-light.gif" alt="System Default" width="350"/> | <img src="gif/sysdefault-dark.gif" alt="System Default Dark" width="350"/> | 
 |:--:| :--:|
 | Light mode |  Dark mode |
 
@@ -58,7 +58,7 @@ btnLoading.indicator = UIActivityIndicatorView()
 ```swift
 btnLoading.indicator = MaterialLoadingIndicator(color: .gray)
 ```
-| <img src="gif/materialdesign.gif" alt="Material Design" width="350"/> | <img src="gif/materialdesign-dark.gif" alt="Material Design Dark" width="350"/> | 
+| <img src="gif/materialdesign-light.gif" alt="Material Design" width="350"/> | <img src="gif/materialdesign-dark.gif" alt="Material Design Dark" width="350"/> | 
 |:--:| :--:|
 | Light mode |  Dark mode |
 
@@ -66,7 +66,7 @@ btnLoading.indicator = MaterialLoadingIndicator(color: .gray)
 ```swift
 btnLoading.indicator = BallPulseSyncIndicator(color: .gray)
 ```
-| <img src="gif/ballpulse.gif" alt="Ball Pulse" width="350"/> | <img src="gif/ballpulse-dark.gif" alt="Ball Pulse Dark" width="350"/> | 
+| <img src="gif/ballpulse-light.gif" alt="Ball Pulse" width="350"/> | <img src="gif/ballpulse-dark.gif" alt="Ball Pulse Dark" width="350"/> | 
 |:--:| :--:|
 | Light mode |  Dark mode |
 
@@ -74,7 +74,7 @@ btnLoading.indicator = BallPulseSyncIndicator(color: .gray)
 ```swift
 btnLoading.indicator = BallSpinFadeIndicator(color: .gray)
 ```
-| <img src="gif/ballpulsesync.gif" alt="Ball Pulse Sync" width="350"/> | <img src="gif/ballpulsesync-dark.gif" alt="Ball Pulse Sync Dark" width="350"/> | 
+| <img src="gif/ballpulsesync-light.gif" alt="Ball Pulse Sync" width="350"/> | <img src="gif/ballpulsesync-dark.gif" alt="Ball Pulse Sync Dark" width="350"/> | 
 |:--:| :--:|
 | Light mode |  Dark mode |
 
@@ -82,7 +82,7 @@ btnLoading.indicator = BallSpinFadeIndicator(color: .gray)
 ```swift
 btnLoading.indicator = LineScalePulseIndicator(color: .gray)
 ```
-| <img src="gif/ballspin.gif" alt="Ball Spin" width="350"/> | <img src="gif/ballspin-dark.gif" alt="Ball Spin Dark" width="350"/> | 
+| <img src="gif/ballspin-light.gif" alt="Ball Spin" width="350"/> | <img src="gif/ballspin-dark.gif" alt="Ball Spin Dark" width="350"/> | 
 |:--:| :--:|
 | Light mode |  Dark mode |
 
@@ -90,7 +90,7 @@ btnLoading.indicator = LineScalePulseIndicator(color: .gray)
 ```swift
 btnLoading.indicator = LineScaleIndicator(color: .gray)
 ```
-| <img src="gif/linescale.gif" alt="Line Scale" width="350"/> | <img src="gif/linescale-dark.gif" alt="Line Scale Dark" width="350"/> | 
+| <img src="gif/linescale-light.gif" alt="Line Scale" width="350"/> | <img src="gif/linescale-dark.gif" alt="Line Scale Dark" width="350"/> | 
 |:--:| :--:|
 | Light mode |  Dark mode |
 
@@ -98,7 +98,7 @@ btnLoading.indicator = LineScaleIndicator(color: .gray)
 ```swift
 btnLoading.indicator = BallPulseIndicator(color: .gray)
 ```
-| <img src="gif/linescalepulse.gif" alt="Line Scale Pulse" width="350"/> | <img src="gif/linescalepulse-dark.gif" alt="Line Scale Pulse Dark" width="350"/> | 
+| <img src="gif/linescalepulse-light.gif" alt="Line Scale Pulse" width="350"/> | <img src="gif/linescalepulse-dark.gif" alt="Line Scale Pulse Dark" width="350"/> | 
 |:--:| :--:|
 | Light mode |  Dark mode |
 
@@ -106,7 +106,7 @@ btnLoading.indicator = BallPulseIndicator(color: .gray)
 ```swift
 btnLoading.indicator = BallBeatIndicator(color: .gray)
 ```
-| <img src="gif/ballbeat.gif" alt="Ball Beat" width="350"/> | <img src="gif/ballbeat-dark.gif" alt="Ball Beat Dark" width="350"/> | 
+| <img src="gif/ballbeat-light.gif" alt="Ball Beat" width="350"/> | <img src="gif/ballbeat-dark.gif" alt="Ball Beat Dark" width="350"/> | 
 |:--:| :--:|
 | Light mode |  Dark mode |
 
@@ -114,7 +114,7 @@ btnLoading.indicator = BallBeatIndicator(color: .gray)
 ```swift
 btnLoading.indicator = LineSpinFadeLoader(color: .gray)
 ```
-| <img src="gif/linespin.gif" alt="Line Spin" width="350"/> | <img src="gif/linespin-dark.gif" alt="Line Spin Dark" width="350"/> | 
+| <img src="gif/linespin-light.gif" alt="Line Spin" width="350"/> | <img src="gif/linespin-dark.gif" alt="Line Spin Dark" width="350"/> | 
 |:--:| :--:|
 | Light mode |  Dark mode |
 
