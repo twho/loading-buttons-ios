@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "MHLoadingButton",
     platforms: [
-        .iOS(.v10),
+        .iOS(.v9),
     ],
     products: [
         .library(
