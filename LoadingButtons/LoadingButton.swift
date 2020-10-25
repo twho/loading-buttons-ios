@@ -8,6 +8,7 @@
 
 import UIKit
 
+@IBDesignable
 open class LoadingButton: UIButton {
     // MARK: - Public variables
     /**
@@ -26,13 +27,22 @@ open class LoadingButton: UIButton {
     /**
      Set to true to add shadow to the button.
      */
-    open var withShadow: Bool = false
+    @IBInspectable open var withShadow: Bool = false
     /**
      The corner radius of the button
      */
-    open var cornerRadius: CGFloat = 12.0 {
+    @IBInspectable open var cornerRadius: CGFloat = 12.0 {
         didSet {
+            self.clipsToBounds = (self.cornerRadius > 0)
             self.layer.cornerRadius = self.cornerRadius
+        }
+    }
+    /**
+     Button background color
+     */
+    @IBInspectable public var bgColor: UIColor = .lightGray {
+        didSet {
+            self.backgroundColor = self.bgColor
         }
     }
     /**
@@ -58,7 +68,6 @@ open class LoadingButton: UIButton {
         case outline
     }
     // Private properties
-    private(set) var bgColor: UIColor = .lightGray
     private var loaderWorkItem: DispatchWorkItem?
     // Init
     public override init(frame: CGRect) {
