@@ -211,27 +211,30 @@ open class LoadingButton: UIButton {
      - Parameter completion: The completion handler.
      */
     open func hideLoader(_ completion: LBCallback = nil) {
-        guard self.subviews.contains(indicator) else { return }
-        // Update loading state
-        isLoading = false
-        self.isUserInteractionEnabled = true
-        indicator.stopAnimating()
-        // Clean up
-        indicator.removeFromSuperview()
-        loaderWorkItem?.cancel()
-        loaderWorkItem = nil
-        // Create a new work item
-        loaderWorkItem = DispatchWorkItem { [weak self] in
-            guard let self = self, let item = self.loaderWorkItem, !item.isCancelled else { return }
-            UIView.transition(with: self, duration: 0.2, options: .curveEaseIn, animations: {
-                self.titleLabel?.alpha = 1.0
-                self.imageView?.alpha = 1.0
-            }) { _ in
-                guard !item.isCancelled else { return }
-                completion?()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            guard self.subviews.contains(self.indicator) else { return }
+            // Update loading state
+            self.isLoading = false
+            self.isUserInteractionEnabled = true
+            self.indicator.stopAnimating()
+            // Clean up
+            self.indicator.removeFromSuperview()
+            self.loaderWorkItem?.cancel()
+            self.loaderWorkItem = nil
+            // Create a new work item
+            self.loaderWorkItem = DispatchWorkItem { [weak self] in
+                guard let self = self, let item = self.loaderWorkItem, !item.isCancelled else { return }
+                UIView.transition(with: self, duration: 0.2, options: .curveEaseIn, animations: {
+                    self.titleLabel?.alpha = 1.0
+                    self.imageView?.alpha = 1.0
+                }) { _ in
+                    guard !item.isCancelled else { return }
+                    completion?()
+                }
             }
+            self.loaderWorkItem?.perform()
         }
-        loaderWorkItem?.perform()
     }
     /**
      Make the content of the button fill the button.
