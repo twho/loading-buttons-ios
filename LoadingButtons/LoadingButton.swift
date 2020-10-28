@@ -125,13 +125,18 @@ open class LoadingButton: UIButton {
      - Parameter withShadow:   set true to show the shadow of the button.
      - Parameter buttonStyle:  specify the button style. Styles currently available are fill and outline.
     */
-    @available(iOS 13.0, *)
+    @available(iOS 13.0, tvOS 13.0, *)
     public convenience init(icon: UIImage? = nil, text: String? = nil, font: UIFont? = nil,
                             cornerRadius: CGFloat = 12.0, withShadow: Bool = false, buttonStyle: ButtonStyle) {
         switch buttonStyle {
         case .fill:
+            #if os(tvOS)
+            self.init(icon: icon, text: text, textColor: .label, font: font,
+                      bgColor: .clear, cornerRadius: cornerRadius, withShadow: withShadow)
+            #else
             self.init(icon: icon, text: text, textColor: .label, font: font,
                       bgColor: .systemFill, cornerRadius: cornerRadius, withShadow: withShadow)
+            #endif
         case .outline:
             self.init(icon: icon, text: text, textColor: .label, font: font,
                       bgColor: .clear, cornerRadius: cornerRadius, withShadow: withShadow)
@@ -288,7 +293,9 @@ extension UIActivityIndicatorView: IndicatorProtocol {
         }
         set {
             let ciColor = CIColor(color: newValue)
+            #if os(iOS)
             self.style = newValue.RGBtoCMYK(red: ciColor.red, green: ciColor.green, blue: ciColor.blue).key > 0.5 ? .gray : .white
+            #endif
             self.tintColor = newValue
         }
     }
