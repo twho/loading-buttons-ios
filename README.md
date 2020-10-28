@@ -21,13 +21,27 @@ You may see the following [Medium](https://medium.com/) article for detailed exp
 - iOS 11.0+
 
 ## Installation
+### CocoaPods
 LoadingButtons project is available via [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```
 $ pod 'MHLoadingButton'
 ```
 
-If you don't use CocoaPods, you can download the entire project then import all the source files and use them in your project.
+### Swift Package Manager
+Add LoadingButtons as dependency in your `Package.swift`
+
+```swift
+import PackageDescription
+
+let package = Package(name: "YourPackage",
+dependencies: [
+.Package(url: "https://github.com/twho/loading-buttons-ios.git", majorVersion: 0),
+]
+)
+```
+
+If you don't use CocoaPods or Swift Package Manager, you can download the entire project then import all the source files and use them in your project.
 
 ## Usage
 ### Declaration
