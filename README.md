@@ -34,10 +34,11 @@ Add LoadingButtons as dependency in your `Package.swift`
 ```swift
 import PackageDescription
 
-let package = Package(name: "YourPackage",
-dependencies: [
-.Package(url: "https://github.com/twho/loading-buttons-ios.git", majorVersion: 0),
-]
+let package = Package(
+    name: "YourPackage",
+    dependencies: [
+        .Package(url: "https://github.com/twho/loading-buttons-ios.git", majorVersion: 0),
+    ]
 )
 ```
 
