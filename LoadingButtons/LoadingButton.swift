@@ -68,6 +68,7 @@ open class LoadingButton: UIButton {
         case outline
     }
     // Private properties
+    private var imageAlpha: CGFloat = 1.0
     private var loaderWorkItem: DispatchWorkItem?
     // Init
     public override init(frame: CGRect) {
@@ -198,8 +199,11 @@ open class LoadingButton: UIButton {
         loaderWorkItem = DispatchWorkItem { [weak self] in
             guard let self = self, let item = self.loaderWorkItem, !item.isCancelled else { return }
             UIView.transition(with: self, duration: 0.2, options: .curveEaseOut, animations: {
-                viewsToBeHidden.forEach {
-                    $0?.alpha = 0.0
+                viewsToBeHidden.forEach { view in
+                    if view == self.imageView {
+                        self.imageAlpha = 0.0
+                    }
+                    view?.alpha = 0.0
                 }
                 self.indicator.alpha = 1.0
             }) { _ in
@@ -233,6 +237,7 @@ open class LoadingButton: UIButton {
                 UIView.transition(with: self, duration: 0.2, options: .curveEaseIn, animations: {
                     self.titleLabel?.alpha = 1.0
                     self.imageView?.alpha = 1.0
+                    self.imageAlpha = 1.0
                 }) { _ in
                     guard !item.isCancelled else { return }
                     completion?()
@@ -251,6 +256,9 @@ open class LoadingButton: UIButton {
     // layoutSubviews
     open override func layoutSubviews() {
         super.layoutSubviews()
+        if let imageView = imageView {
+            imageView.alpha = imageAlpha
+        }
         indicator.center = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/2)
     }
     // MARK: Touch
